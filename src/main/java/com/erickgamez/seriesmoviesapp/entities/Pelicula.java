@@ -18,7 +18,8 @@ public class Pelicula implements Serializable{
     @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
     private Date releaseDate;
     private Genero genero;
-    private List<Actor> mainCharacters;
+    /*@Column(name = "main_characters")
+    private List<Actor> mainCharacters;*/
 
     //Get and Set ID
     public long getId() {
@@ -57,11 +58,11 @@ public class Pelicula implements Serializable{
     }
 
     //Get and Set Characters
-    public List<Actor> getMainCharacters() {
+    /*public List<Actor> getMainCharacters() {
         return mainCharacters;
     }
 
     public void setMainCharacters(List<Actor> mainCharacters) {
         this.mainCharacters = mainCharacters;
-    }
+    }*/
 }
