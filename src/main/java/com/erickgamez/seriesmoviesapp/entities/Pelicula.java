@@ -1,6 +1,5 @@
 package com.erickgamez.seriesmoviesapp.entities;
 
-import com.erickgamez.seriesmoviesapp.entities.declarations.Variables;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -9,7 +8,17 @@ import java.util.List;
 
 @Entity //Emula el comportamiento de una base de datos
 @Table(name = "peliculas")
-public class Pelicula extends Variables implements Serializable{
+public class Pelicula implements Serializable{
+
+    @Id //Para que sea la primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Para qye la columna sea auto incremental
+    private long id;
+    private String name;
+    @Column(name = "release_date")
+    @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
+    private Date releaseDate;
+    private Genero genero;
+    private List<Actor> mainCharacters;
 
     //Get and Set ID
     public long getId() {
