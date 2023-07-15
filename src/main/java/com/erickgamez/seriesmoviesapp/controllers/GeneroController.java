@@ -1,29 +1,31 @@
 package com.erickgamez.seriesmoviesapp.controllers;
 
-import com.erickgamez.seriesmoviesapp.dao.IGeneroRepository;
 import com.erickgamez.seriesmoviesapp.entities.Genero;
+import com.erickgamez.seriesmoviesapp.services.GeneroService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GeneroController {
 
-    private IGeneroRepository genreRepository;
-    public GeneroController(IGeneroRepository generoRepository){
-        this.genreRepository = generoRepository;
+    private final GeneroService generoService;
+
+    public GeneroController(GeneroService generoService){
+        this.generoService = generoService;
     }
 
     @PostMapping("genero")
-    public Long saveGenre(@RequestParam String genreName){
+    public Long saveGenre(@RequestParam String name){
         Genero genre = new Genero();
-        genre.setName(genreName);
-        genreRepository.save(genre);
+        genre.setName(name);
 
-        //Una vez que se haya guardado un nuevo género, nos devolvera el ID
+        generoService.save(genre);
+
+        //Una vez que se haya guardado un nuevo género, nos devolverá el ID
         return genre.getId();
     }
 
     @GetMapping("genero/{id}")
     public String searchForId(@PathVariable(name = "id") long id){
-        return genreRepository.findById(id).getName();
+        return generoService.findById(id).getName();
     }
 }
