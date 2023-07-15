@@ -25,7 +25,7 @@ public class GeneroController {
     }
 
     @GetMapping("genero/{id}")
-    public String searchForId(@PathVariable(name = "id") long id){
+    public String searchForId(@PathVariable(name = "id") Long id){
         return generoService.findById(id).getName();
     }
 }
