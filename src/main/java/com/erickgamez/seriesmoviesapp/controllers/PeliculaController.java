@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class PeliculaController {
 
     private final IPeliculaService peliculaService;
+    Pelicula pelicula;
 
     public PeliculaController(IPeliculaService peliculaService){
         this.peliculaService = peliculaService;
+        pelicula = new Pelicula();
     }
 
     @GetMapping("/pelicula")
     public String create(Model model){
-        Pelicula pelicula = new Pelicula();
         model.addAttribute("titulo", "Nueva Película");
         model.addAttribute("pelicula", pelicula);
         return "pelicula";
@@ -26,7 +27,6 @@ public class PeliculaController {
 
     @GetMapping("/pelicula/{id}")
     public String edit(@PathVariable(name = "id") Long id, Model model){
-        Pelicula pelicula = new Pelicula();
         model.addAttribute("titulo", "Editar Película");
         model.addAttribute("pelicula", pelicula);
         return "pelicula";
