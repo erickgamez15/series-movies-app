@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity //Emula el comportamiento de una base de datos
 @Table(name = "series")
 public class Serie implements Serializable {
@@ -16,7 +18,9 @@ public class Serie implements Serializable {
     private String name;
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
+    @OneToOne
     private Genero genero;
     /*@Column(name = "main_characters")
     private List<Actor> mainCharacters;*/
