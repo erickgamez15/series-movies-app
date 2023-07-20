@@ -15,15 +15,20 @@ public class Serie implements Serializable {
     @Id //Para que sea la primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para qye la columna sea auto incremental
     private long id;
+
     private String name;
+
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date releaseDate;
+
     @OneToOne
     private Genero genero;
-    /*@Column(name = "main_characters")
-    private List<Actor> mainCharacters;*/
+
+    @Column(name = "main_characters")
+    @ManyToMany
+    private List<Actor> mainCharacters;
 
     //Get and Set ID
     public long getId() {
@@ -62,11 +67,11 @@ public class Serie implements Serializable {
     }
 
     //Get and Set Characters
-    /*public List<Actor> getMainCharacters() {
+    public List<Actor> getMainCharacters() {
         return mainCharacters;
     }
 
     public void setMainCharacters(List<Actor> mainCharacters) {
         this.mainCharacters = mainCharacters;
-    }*/
+    }
 }
