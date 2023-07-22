@@ -5,12 +5,15 @@ import com.erickgamez.seriesmoviesapp.services.IActorService;
 import com.erickgamez.seriesmoviesapp.services.IGeneroService;
 import com.erickgamez.seriesmoviesapp.services.ISerieService;
 
+import jakarta.validation.Valid;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,14 +54,18 @@ public class SerieController {
 
     //Creación del endpoint
     @PostMapping("/serie")
-    public String guardar(Serie serie,  @ModelAttribute(name="ids") String ids){
-        //Expresión lambda para que los ids quden en una lista del tipo: 1,2,3,4,5,..,n
-        List<Long> idsActores = Arrays.stream(ids.split(",")).map(Long::parseLong).collect(Collectors.toList());
+    public String guardar(@Valid Serie serie, BindingResult br, @ModelAttribute(name="ids") String ids){
 
-        serie.setActor(actorService.findAllById(idsActores));
+        if (br.hasErrors()) return "/peliculas"; 
+        else {
+            //Expresión lambda para que los ids quden en una lista del tipo: 1,2,3,4,5,..,n
+            List<Long> idsActores = Arrays.stream(ids.split(",")).map(Long::parseLong).collect(Collectors.toList());
 
-        serieService.save(serie);
+            serie.setActor(actorService.findAllById(idsActores));
+
+            serieService.save(serie);
         
-        return "redirect:index";
+            return "redirect:index";
+        }
     }
 }
