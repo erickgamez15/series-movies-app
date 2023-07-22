@@ -1,6 +1,8 @@
 package com.erickgamez.seriesmoviesapp.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,13 +18,16 @@ public class Serie implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para qye la columna sea auto incremental
     private long id;
 
+    @NotEmpty(message = "*Ingresar el nombre de una serie")
     private String name;
 
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "*Selecciona una fecha")
     private Date releaseDate;
 
+    @NotNull(message = "*Selecciona un género")
     @OneToOne
     private Genero genero;
 

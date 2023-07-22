@@ -54,10 +54,13 @@ public class SerieController {
 
     //Creación del endpoint
     @PostMapping("/serie")
-    public String guardar(@Valid Serie serie, BindingResult br, @ModelAttribute(name="ids") String ids){
+    public String guardar(@Valid Serie serie, BindingResult br, @ModelAttribute(name="ids") String ids, Model model){
 
-        if (br.hasErrors()) return "/peliculas"; 
-        else {
+        if (br.hasErrors()){
+            model.addAttribute("generos", generoService.findAll());
+            model.addAttribute("actores", actorService.findAll());
+            return "/serie";
+        } else {
             //Expresión lambda para que los ids quden en una lista del tipo: 1,2,3,4,5,..,n
             List<Long> idsActores = Arrays.stream(ids.split(",")).map(Long::parseLong).collect(Collectors.toList());
 

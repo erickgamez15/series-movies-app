@@ -18,16 +18,16 @@ public class Pelicula implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Para qye la columna sea auto incremental
     private long id;
 
-    @NotEmpty() //Verifica que el String no sea null ni tampoco vacío
+    @NotEmpty(message = "*Ingresar el nombre de una película") //Verifica que el String no sea null ni tampoco vacío
     private String name;
 
     @Column(name = "release_date")
     @Temporal(TemporalType.DATE)//Agrega solo la fecha, sin la hora
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull() //Que el campo fecha no sea null
+    @NotNull(message = "*Selecciona una fecha") //Que el campo fecha no sea null
     private Date releaseDate;
 
-    @NotNull()
+    @NotNull(message = "*Selecciona un género")
     @OneToOne
     private Genero genero;
     
