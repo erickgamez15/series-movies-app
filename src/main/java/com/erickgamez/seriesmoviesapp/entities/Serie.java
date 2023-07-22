@@ -26,9 +26,8 @@ public class Serie implements Serializable {
     @OneToOne
     private Genero genero;
 
-    @Column(name = "main_characters")
     @ManyToMany
-    private List<Actor> mainCharacters;
+    private List<Actor> actor;
 
     //Get and Set ID
     public long getId() {
@@ -66,12 +65,12 @@ public class Serie implements Serializable {
         this.genero = genero;
     }
 
-    //Get and Set Characters
-    public List<Actor> getMainCharacters() {
-        return mainCharacters;
+    //Get and Set Actor
+    public List<Actor> getActor() {
+        return actor;
     }
 
-    public void setMainCharacters(List<Actor> mainCharacters) {
-        this.mainCharacters = mainCharacters;
+    public void setActor(List<Actor> actor) {
+        this.actor = actor;
     }
 }

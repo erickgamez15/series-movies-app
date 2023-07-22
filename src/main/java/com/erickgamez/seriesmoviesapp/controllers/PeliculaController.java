@@ -55,9 +55,10 @@ public class PeliculaController {
         //Expresión lambda para que los ids quden en una lista del tipo: 1,2,3,4,5,..,n
         List<Long> idsActores = Arrays.stream(ids.split(",")).map(Long::parseLong).collect(Collectors.toList());
 
-        pelicula.setMainCharacters(actorService.findAllById(idsActores));
+        pelicula.setActor(actorService.findAllById(idsActores));
 
         peliculaService.save(pelicula);
+        
         return "redirect:index";
     }
 }

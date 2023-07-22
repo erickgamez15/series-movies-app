@@ -55,9 +55,10 @@ public class SerieController {
         //Expresión lambda para que los ids quden en una lista del tipo: 1,2,3,4,5,..,n
         List<Long> idsActores = Arrays.stream(ids.split(",")).map(Long::parseLong).collect(Collectors.toList());
 
-        serie.setMainCharacters(actorService.findAllById(idsActores));
+        serie.setActor(actorService.findAllById(idsActores));
 
         serieService.save(serie);
+        
         return "redirect:index";
     }
 }
